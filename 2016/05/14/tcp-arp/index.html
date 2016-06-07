@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python,多线程," />
+  <meta name="keywords" content="ARP," />
 
 
 
@@ -84,37 +84,22 @@
 
 
 
-<meta name="description" content="多线程类似于同时执行多个不同程序，多线程运行有如下优点：
-
-使用线程可以把占据长时间的程序中的任务放到后台去处理。
-用户界面可以更加吸引人，这样比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度
-程序的运行速度可能加快
-在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。
-
-线程在执行过程中">
+<meta name="description" content="ARP协议的基本功能就是通过目标设备的IP地址，查询目标设备的MAC地址，以保证通信的进行。
+ARP攻击就是通过伪造IP地址和MAC地址实现ARP欺骗，能够在网络中产生大量的ARP通信量使网络阻塞，攻击者只要持续不断的发出伪造的ARP响应包就能更改目标主机ARP缓存中的IP-MAC条目，造成网络中断或中间人攻击。
+ARP攻击主要是存在于局域网网络中，局域网中若有一台计算机感染ARP木马，则感染该A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python 多线程">
-<meta property="og:url" content="http://www.mjyplusone.com/2016/02/20/python-thread/index.html">
+<meta property="og:title" content="python Queue 模块">
+<meta property="og:url" content="http://www.mjyplusone.com/2016/05/14/tcp-arp/index.html">
 <meta property="og:site_name" content="加一的城堡">
-<meta property="og:description" content="多线程类似于同时执行多个不同程序，多线程运行有如下优点：
-
-使用线程可以把占据长时间的程序中的任务放到后台去处理。
-用户界面可以更加吸引人，这样比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度
-程序的运行速度可能加快
-在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。
-
-线程在执行过程中">
-<meta property="og:updated_time" content="2016-06-07T12:39:03.096Z">
+<meta property="og:description" content="ARP协议的基本功能就是通过目标设备的IP地址，查询目标设备的MAC地址，以保证通信的进行。
+ARP攻击就是通过伪造IP地址和MAC地址实现ARP欺骗，能够在网络中产生大量的ARP通信量使网络阻塞，攻击者只要持续不断的发出伪造的ARP响应包就能更改目标主机ARP缓存中的IP-MAC条目，造成网络中断或中间人攻击。
+ARP攻击主要是存在于局域网网络中，局域网中若有一台计算机感染ARP木马，则感染该A">
+<meta property="og:updated_time" content="2016-06-07T12:44:23.802Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python 多线程">
-<meta name="twitter:description" content="多线程类似于同时执行多个不同程序，多线程运行有如下优点：
-
-使用线程可以把占据长时间的程序中的任务放到后台去处理。
-用户界面可以更加吸引人，这样比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度
-程序的运行速度可能加快
-在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。
-
-线程在执行过程中">
+<meta name="twitter:title" content="python Queue 模块">
+<meta name="twitter:description" content="ARP协议的基本功能就是通过目标设备的IP地址，查询目标设备的MAC地址，以保证通信的进行。
+ARP攻击就是通过伪造IP地址和MAC地址实现ARP欺骗，能够在网络中产生大量的ARP通信量使网络阻塞，攻击者只要持续不断的发出伪造的ARP响应包就能更改目标主机ARP缓存中的IP-MAC条目，造成网络中断或中间人攻击。
+ARP攻击主要是存在于局域网网络中，局域网中若有一台计算机感染ARP木马，则感染该A">
 
 
 
@@ -135,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="http://www.mjyplusone.com/2016/02/20/python-thread/"/>
+  <link rel="canonical" href="http://www.mjyplusone.com/2016/05/14/tcp-arp/"/>
 
-  <title> Python 多线程 | 加一的城堡 </title>
+  <title> python Queue 模块 | 加一的城堡 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -277,7 +262,7 @@
             
             
               
-                Python 多线程
+                python Queue 模块
               
             
           </h1>
@@ -289,8 +274,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-20T17:36:25+08:00" content="2016-02-20">
-              2016-02-20
+            <time itemprop="dateCreated" datetime="2016-05-14T15:31:10+08:00" content="2016-05-14">
+              2016-05-14
             </time>
           </span>
 
@@ -303,8 +288,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
                   </a>
                 </span>
 
@@ -336,42 +321,17 @@
       
 
       
-        <p>多线程类似于同时执行多个不同程序，多线程运行有如下优点：</p>
-<ol>
-<li>使用线程可以把占据长时间的程序中的任务放到后台去处理。</li>
-<li>用户界面可以更加吸引人，这样比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度</li>
-<li>程序的运行速度可能加快</li>
-<li>在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。</li>
-</ol>
-<p>线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。 </p>
-<p>每个线程都有他自己的一组CPU寄存器，称为线程的上下文，该上下文反映了线程上次运行该线程的CPU寄存器的状态。<br>指令指针和堆栈指针寄存器是线程上下文中两个最重要的寄存器，线程总是在进程得到上下文中运行的，这些地址都用于标志拥有线程的进程地址空间中的内存。 </p>
-<ul>
-<li>线程可以被抢占（中断）。</li>
-<li>在其他线程正在运行时，线程可以暂时搁置（也称为睡眠） – 这就是线程的退让。 </li>
-</ul>
-<h2 id="开始学习Python线程"><a href="#开始学习Python线程" class="headerlink" title="开始学习Python线程"></a>开始学习Python线程</h2><p>Python中使用线程有两种方式：函数或者用类来包装线程对象。</p>
-<p>函数式：调用thread模块中的start_new_thread()函数来产生新线程。<br>语法如下:</p>
-<pre><code>thread.start_new_thread ( function, args[, kwargs] )
-</code></pre><p>参数说明:</p>
-<ul>
-<li>function - 线程函数。</li>
-<li>args - 传递给线程函数的参数,他必须是个tuple类型。</li>
-<li>kwargs - 可选参数。</li>
-</ul>
-<p>实例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为线程定义一个函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_time</span><span class="params">( threadName, delay)</span>:</span></span><br><span class="line">   count = <span class="number">0</span></span><br><span class="line">   <span class="keyword">while</span> count &lt; <span class="number">5</span>:</span><br><span class="line">      time.sleep(delay)</span><br><span class="line">      count += <span class="number">1</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">"%s: %s"</span> % ( threadName, time.ctime(time.time()) )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建两个线程</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">   thread.start_new_thread( print_time, (<span class="string">"Thread-1"</span>, <span class="number">2</span>, ) )</span><br><span class="line">   thread.start_new_thread( print_time, (<span class="string">"Thread-2"</span>, <span class="number">4</span>, ) )</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">   <span class="keyword">print</span> <span class="string">"Error: unable to start thread"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">   <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-<p>执行以上程序输出结果如下：</p>
-<pre><code>Thread-1: Thu Jan 22 15:42:17 2009
-Thread-1: Thu Jan 22 15:42:19 2009
-Thread-2: Thu Jan 22 15:42:19 2009
-Thread-1: Thu Jan 22 15:42:21 2009
-Thread-2: Thu Jan 22 15:42:23 2009
-Thread-1: Thu Jan 22 15:42:23 2009
-Thread-1: Thu Jan 22 15:42:25 2009
-Thread-2: Thu Jan 22 15:42:27 2009
-Thread-2: Thu Jan 22 15:42:31 2009
-Thread-2: Thu Jan 22 15:42:35 2009
-</code></pre><p>线程的结束一般依靠线程函数的自然结束；也可以在线程函数中调用thread.exit()，他抛出SystemExit exception，达到退出线程的目的。 </p>
+        <p>ARP协议的基本功能就是通过目标设备的IP地址，查询目标设备的MAC地址，以保证通信的进行。</p>
+<p>ARP攻击就是通过伪造IP地址和MAC地址实现ARP欺骗，能够在网络中产生大量的ARP通信量使网络阻塞，攻击者只要持续不断的发出伪造的ARP响应包就能更改目标主机ARP缓存中的IP-MAC条目，造成网络中断或中间人攻击。</p>
+<p>ARP攻击主要是存在于局域网网络中，局域网中若有一台计算机感染ARP木马，则感染该ARP木马的系统将会试图通过“ARP欺骗”手段截获所在网络内其它计算机的通信信息，并因此造成网内其它计算机的通信故障。</p>
+<p>攻击者向电脑A发送一个伪造的ARP响应，告诉电脑A：电脑B的IP地址192.168.0.2对应的MAC地址是00-aa-00-62-c6-03，电脑A信以为真，将这个对应关系写入自己的ARP缓存表中，以后发送数据时，将本应该发往电脑B的数据发送给了攻击者。同样的，攻击者向电脑B也发送一个伪造的ARP响应，告诉电脑B：电脑A的IP地址192.168.0.1对应的MAC地址是00-aa-00-62-c6-03，电脑B也会将数据发送给攻击者。</p>
+<p>至此攻击者就控制了电脑A和电脑B之间的流量，他可以选择被动地监测流量，获取密码和其他涉密信息，也可以伪造数据，改变电脑A和电脑B之间的通信内容。</p>
+<p>为了解决ARP攻击问题，可以在网络中的交换机上配置802.1x协议。</p>
+<p>IEEE 802.1x是基于端口的访问控制协议，它对连接到交换机的用户进行认证和授权。在交换机上配置802.1x协议后，攻击者在连接交换机时需要进行身份认证（结合MAC、端口、帐户、VLAN和密码等），只有通过认证后才能向网络发送数据。攻击者未通过认证就不能向网络发送伪造的ARP报文。</p>
+<p>1) 什么是ARP欺骗？</p>
+<p>在局域网中，黑客经过收到的ARP Request广播包，能够偷听到其它节点的 (IP, MAC) 地址, 黑客就伪装为A，告诉B (受害者) 一个假地址，使得B在发送给A 的数据包都被黑客截取，而A, B 浑然不知。</p>
+<p>2) 为什么黑客能够进行ARP欺骗？ ARP 是个早期的网络协议，RFC826在 1980就出版了。早期的互联网采取的是信任模式，在科研、大学内部使用，追求功能、速度，没考虑网络安全。尤其以太网的泛洪特点，能够很方便的用来查询。但这也为日后的黑客开了方便之门。黑客只要在局域网内阅读送上门来的ARP Request就能偷听到网内所有的 (IP, MAC)地址。而节点收到ARP Reply时，也不会质疑。黑客很容易冒充他人。</p>
+<p>3) 能够防止欺骗吗？ 不能。但这种伤害的伤害已经很小。因为局域网的工作环境有了改变， 服务器通常不会和终端主机在同一个局域网。</p>
 
       
     </div>
@@ -393,9 +353,7 @@ Thread-2: Thu Jan 22 15:42:35 2009
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag">#Python</a>
-          
-            <a href="/tags/多线程/" rel="tag">#多线程</a>
+            <a href="/tags/ARP/" rel="tag">#ARP</a>
           
         </div>
       
@@ -404,17 +362,13 @@ Thread-2: Thu Jan 22 15:42:35 2009
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/24/python-queue/" rel="next" title="python Queue 模块">
-                <i class="fa fa-chevron-left"></i> python Queue 模块
+              <a href="/2016/02/20/python-thread/" rel="next" title="Python 多线程">
+                <i class="fa fa-chevron-left"></i> Python 多线程
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/14/tcp-arp/" rel="prev" title="python Queue 模块">
-                python Queue 模块 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -528,7 +482,7 @@ Thread-2: Thu Jan 22 15:42:35 2009
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始学习Python线程"><span class="nav-number">1.</span> <span class="nav-text">开始学习Python线程</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>

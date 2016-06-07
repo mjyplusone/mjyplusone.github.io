@@ -258,6 +258,129 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/14/tcp-arp/" itemprop="url">
+                  python Queue 模块
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-14T15:31:10+08:00" content="2016-05-14">
+              2016-05-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>ARP协议的基本功能就是通过目标设备的IP地址，查询目标设备的MAC地址，以保证通信的进行。</p>
+<p>ARP攻击就是通过伪造IP地址和MAC地址实现ARP欺骗，能够在网络中产生大量的ARP通信量使网络阻塞，攻击者只要持续不断的发出伪造的ARP响应包就能更改目标主机ARP缓存中的IP-MAC条目，造成网络中断或中间人攻击。</p>
+<p>ARP攻击主要是存在于局域网网络中，局域网中若有一台计算机感染ARP木马，则感染该ARP木马的系统将会试图通过“ARP欺骗”手段截获所在网络内其它计算机的通信信息，并因此造成网内其它计算机的通信故障。</p>
+<p>攻击者向电脑A发送一个伪造的ARP响应，告诉电脑A：电脑B的IP地址192.168.0.2对应的MAC地址是00-aa-00-62-c6-03，电脑A信以为真，将这个对应关系写入自己的ARP缓存表中，以后发送数据时，将本应该发往电脑B的数据发送给了攻击者。同样的，攻击者向电脑B也发送一个伪造的ARP响应，告诉电脑B：电脑A的IP地址192.168.0.1对应的MAC地址是00-aa-00-62-c6-03，电脑B也会将数据发送给攻击者。</p>
+<p>至此攻击者就控制了电脑A和电脑B之间的流量，他可以选择被动地监测流量，获取密码和其他涉密信息，也可以伪造数据，改变电脑A和电脑B之间的通信内容。</p>
+<p>为了解决ARP攻击问题，可以在网络中的交换机上配置802.1x协议。</p>
+<p>IEEE 802.1x是基于端口的访问控制协议，它对连接到交换机的用户进行认证和授权。在交换机上配置802.1x协议后，攻击者在连接交换机时需要进行身份认证（结合MAC、端口、帐户、VLAN和密码等），只有通过认证后才能向网络发送数据。攻击者未通过认证就不能向网络发送伪造的ARP报文。</p>
+<p>1) 什么是ARP欺骗？</p>
+<p>在局域网中，黑客经过收到的ARP Request广播包，能够偷听到其它节点的 (IP, MAC) 地址, 黑客就伪装为A，告诉B (受害者) 一个假地址，使得B在发送给A 的数据包都被黑客截取，而A, B 浑然不知。</p>
+<p>2) 为什么黑客能够进行ARP欺骗？ ARP 是个早期的网络协议，RFC826在 1980就出版了。早期的互联网采取的是信任模式，在科研、大学内部使用，追求功能、速度，没考虑网络安全。尤其以太网的泛洪特点，能够很方便的用来查询。但这也为日后的黑客开了方便之门。黑客只要在局域网内阅读送上门来的ARP Request就能偷听到网内所有的 (IP, MAC)地址。而节点收到ARP Reply时，也不会质疑。黑客很容易冒充他人。</p>
+<p>3) 能够防止欺骗吗？ 不能。但这种伤害的伤害已经很小。因为局域网的工作环境有了改变， 服务器通常不会和终端主机在同一个局域网。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/02/20/python-thread/" itemprop="url">
                   Python 多线程
                 </a>
@@ -573,7 +696,7 @@ myqueue = Queue.Queue(maxsize = 10)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -581,7 +704,7 @@ myqueue = Queue.Queue(maxsize = 10)
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -590,7 +713,7 @@ myqueue = Queue.Queue(maxsize = 10)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
