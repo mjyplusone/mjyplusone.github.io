@@ -258,8 +258,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/06/07/robotframework-tutorial-overview/" itemprop="url">
-                  Robot Framework 教程 - 概览（译）
+                <a class="post-title-link" href="/2016/02/20/python-thread/" itemprop="url">
+                  Python 多线程
                 </a>
               
             
@@ -272,8 +272,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-07T20:33:01+08:00" content="2016-06-07">
-              2016-06-07
+            <time itemprop="dateCreated" datetime="2016-02-20T17:36:25+08:00" content="2016-02-20">
+              2016-02-20
             </time>
           </span>
 
@@ -286,8 +286,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/自动化测试/" itemprop="url" rel="index">
-                    <span itemprop="name">自动化测试</span>
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
                   </a>
                 </span>
 
@@ -321,67 +321,42 @@
       
         
           
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a href="http://code.google.com/p/robotframework/" target="_blank" rel="external">Robot Framework</a> 是一个通用的自动化测试框架。这是本系列的第一篇文章，将会给出一个全面的概述。</p>
-<p>请注意，第一篇文章几乎不会包含任何”真正实现方面的东西”，而是讲述一些高级别、抽象的概念，来为以后的文章打下坚实的基础。</p>
-<h2 id="什么是自动化测试框架"><a href="#什么是自动化测试框架" class="headerlink" title="什么是自动化测试框架"></a>什么是自动化测试框架</h2><p>如果你已经有自动化测试的经验（例如，使用过一些自动化测试工具），你可以直接跳过本小节。</p>
-<p>现在，我想先问一个问题：什么是自动化测试？以及它为何不同于手动执行的测试？Michael Bolton 写的<a href="http://www.developsense.com/blog/2009/08/testing-vs-checking/" target="_blank" rel="external">这篇文章</a>对这两个问题给出了一个非常好的答案：</p>
-<blockquote>
-<p>核对是机器干的事，测试则需要智慧。</p>
-</blockquote>
-<p>然而请注意，当我们下面讨论自动化测试时，会同时使用测试和核对两个术语。</p>
-<p>让我们来看个具体的例子，比如说一个保险公司的评级引擎。这个引擎会根据输入的某些参数（数字）来计算值。对于这样一个算法已知的系统而言，显然大量（自动化）核对是非常合适的。但检验这个算法正确与否，则需要一些思考。</p>
-<p>假设我们有一个基于数据库表的接口，和一个批处理程序：从一个表中取出数据，计算后与另一个表中的数据核对结果。</p>
-<p>首先，我们需要测试脚本语言（取决于个人喜好，可以是 Shell, Perl, Java 等等）。此外我们还要准备一些基本的测试功能。然后访问数据库表，执行一个又一个脚本，测试结果最好以某种报告的形式返回。一旦脚本运行完毕，我们便可以开始核对检查工作。基本上，我们认为，一个典型的自动化测试框架应该提供上述的功能。</p>
-<p><img src="https://raw.githubusercontent.com/lyyyuna/blog_img/master/blog/201601/GenericFrameworkView.png" alt="最简测试框架"></p>
-<p>上图描述了一个非常基本的自动化测试框架。该框架有一个可执行测试的核心系统，可以输出一些报告，并提供接口来插入特定的测试功能。这个插入接口实现会非常简单。</p>
-<p>这就带来一个基本的问题：当我用这些测试框架时，该用什么编程语言来实现我的测试功能？稍后我们会详细回答这个问题，但现在我们可以说，<strong>Robot Framework</strong> 测试框架允许使用很多不同的语言。</p>
-<p>在了解 <strong>Robot Framework</strong> 的具体体系结构之前，我们先讨论下 <strong>Robot Framework</strong> 的核心术语，即<strong>关键字驱动测试</strong>。</p>
-<h2 id="什么是关键字驱动测试"><a href="#什么是关键字驱动测试" class="headerlink" title="什么是关键字驱动测试"></a>什么是关键字驱动测试</h2><p>每当我试图解释什么是关键字的时候，我总会把它称为函数或者方法，其能够用于测试被测系统的一个方面。</p>
-<p>真正强大的是，一个关键字可以由其关键字来定义。这就是为什么通常说：</p>
-<ul>
-<li><strong>高级别关键字</strong>：这些关键字用来测试系统业务逻辑。</li>
-<li><strong>低级别关键字</strong>：为了控制高级别关键字的实现在合适的大小，会将其分割成几个低级别关键字。</li>
-<li><strong>技术性关键字</strong>：这些关键字提供技术实现细节。</li>
-</ul>
-<p>下面这张图用一个关键字例子描述了这三者的关系。</p>
-<p><img src="https://raw.githubusercontent.com/lyyyuna/blog_img/master/blog/201601/Keywords.png" alt="嵌套的关键字定义"></p>
-<p>通常技术性关键字可以由任何编程语言来实现（好吧，不是真的）。其他的<strong>关键字</strong>则是由已存在的关键字组合而成。即使本文关注的是抽象的概念，我们还是来看一个具体的关键字定义：</p>
-<p><img src="https://raw.githubusercontent.com/lyyyuna/blog_img/master/blog/201601/KeywordGoogleSearch.png" alt="GoogleS earch 关键字"></p>
-<p>这个例子表明， Google Search 这个关键字可以由 <strong>Selenium Library</strong> 库中的关键字来创建。好消息是已经有大量预定义的关键字，它们的集合称为<strong>测试库</strong>。</p>
-<p>好，让我们开始。。。</p>
-<h2 id="说好的概览"><a href="#说好的概览" class="headerlink" title="说好的概览"></a>说好的概览</h2><p>最后开始我们的主题，<strong>Robot Framework</strong> 概览。安装 <strong>Robot Framework</strong> 时，一些标准测试库会随核心框架一起安装。</p>
-<p>除了<a href="http://code.google.com/p/robotframework/wiki/TestLibraries" target="_blank" rel="external">标准测试库</a>外，还有很多<a href="http://code.google.com/p/robotframework/wiki/TestLibraries#External_test_libraries" target="_blank" rel="external">额外的外部测试库</a>。它们通常是社区由不同的目的贡献的。在写特定测试用例的时候，你完全可以混用不同测试库的所有关键字。这意味着，在测试一个 web 应用时，可以用 <strong>Selenium Library</strong> 来与 web 前端交互，用 <strong>Database Library</strong> 来检测数据库中数据的正确性。理想情况下，完全不需要编程，只需组合库中的关键字来构成高级别关键字。</p>
-<p><img src="https://raw.githubusercontent.com/lyyyuna/blog_img/master/blog/201601/Overview_3.png" alt="Robot Framework 概览"></p>
-<p>Robot Framework 除了核心功能和测试库外，还提供了一个 IDE (RIDE, Robot Integrated Development Environment)，用户可以在此编写和组织自己的测试用例和关键字。请注意，这个 RIDE 不是用来写技术性关键字的。技术性关键字取决于你的开发环境，比如 Eclipse 来开发 Java 写的关键字。</p>
-<p>上图中尚未包含<strong>资源文件</strong>。我们测试用例的集合称作<strong>测试套件</strong>，听起来很有道理。现在为<strong>测试套件</strong>添加新关键字也是可行的。但最好在外部的<strong>资源文件</strong>中定义关键字。</p>
-<p>现在，我们在使用 Robot Framwwork 框架时，有三个重要的概念：</p>
-<ul>
-<li><strong>测试套件</strong>：这是测试用例（机器的核对工作）的容器。通常每个项目至少有一个<em>测试套件</em>。在大型工程中，需要根据功能来划分不同的<em>测试套件</em>。</li>
-<li><strong>资源文件</strong>：为了让测试设计者的角度看，几乎总会定义高级别关键字。反过来说，通常会有自己的资源文件。特别是对产品开发或者一些长期项目而言，肯定能益于<strong>关键字</strong>，而且还能被其他项目组使用。</li>
-<li><strong>测试库</strong>：通常不需要编写自己的<strong>技术性关键字</strong>，除非你在使用特定技术细节，你才需要自己实现一个新的测试库，不过这并不费时。</li>
-</ul>
-<p>需要强调的是，<strong>测试库</strong>中的关键字和<strong>资源文件</strong>中组合成的关键字，在使用时没有区别。</p>
-<h2 id="自定义测试功能该用什么语言"><a href="#自定义测试功能该用什么语言" class="headerlink" title="自定义测试功能该用什么语言"></a>自定义测试功能该用什么语言</h2><p>Robot Framework 自身和其核心库都是由 <a href="http://www.python.org/" target="_blank" rel="external">Python</a> 实现的。因此，如果熟悉 Python （或者打算开始熟悉 :)），用其写自己的关键字是个好的选择。我一直认为 Python 是个很酷的语言，但如果 Robot Framework 局限于 Python，它不会这么成功。这就是为什么会有 <a href="http://www.jython.org/" target="_blank" rel="external">Jython</a>。有了 Jython 就可以在 Java 的虚拟机上运行 Python 代码。这使得我们能够用 Java 来编写测试库，甚至是任何编译成 Java Byte Code 的语言。</p>
-<blockquote>
-<p>在 .NET 系中，IronPython 和 Jython 是类似的。</p>
-</blockquote>
-<p>这引出了以下的安装堆栈：</p>
-<p><img src="https://raw.githubusercontent.com/lyyyuna/blog_img/master/blog/201601/InstallationStacks.png" alt="Robot Framework 安装堆栈"></p>
-<p>Robot Framework 历史上是上图最左边的安装堆栈（在没有 RIDE 的情况下）。早期 Jython 的安装和支持欠佳。然而，现在 Java 已经支持的很好了，只有很少的缺陷。</p>
-<p>现在还有 JAR 安装方式的 Robot Framework，Python 的测试库和 Jython 都被打包成一个大的 JAR 文件。这有很大的优势，你可以将 JAR 放入版本控制中，或者是放入本地的 Maven 仓库中。这样就能保证团队成员都使用相同版本的 Robot Framework，且能够实时更新。不过也有缺点，这种情况下，RIDE 无法显示 JAR 文件关键字的帮助信息，所以 RIDE 还需要单独安装。</p>
-<p>好，现在回到我们的主题：用什么语言来实现自己的测试功能。</p>
-<h2 id="Remote-Libraries"><a href="#Remote-Libraries" class="headerlink" title="Remote Libraries"></a>Remote Libraries</h2><p>目前为止，无论是本地还是服务器，Robot Framework 都是安装在同一台机器。然后我们也看到可以用 Python, Jython 和纯 Java 语言来开发测试库。</p>
-<p>用 <a href="http://code.google.com/p/robotframework/wiki/RemoteLibrary" target="_blank" rel="external">Remote Libraries</a>，可以在其他机器中，用支持 <a href="http://code.google.com/p/robotframework/wiki/RemoteLibrary" target="_blank" rel="external">XML-RPC protocol</a> 的任何语言来编写测试库。</p>
-<p><img src="https://raw.githubusercontent.com/lyyyuna/blog_img/master/blog/201601/RemoteLibrary.png" alt="Remote Library 用法"></p>
-<p>当在测试用例和资源文件中导入 Remote Library，它们用起来和普通的库没有区别。还有一个优点是，你也可以从 Remote Library 中获取帮助文件。如果对其实现感兴趣，可以看看 Database Library 的源码。需要指出的是，Remote Library 功能本身就是某些测试库的附加功能。</p>
-<p>Remote Library 作为一个远程的服务器，而 Robot Framework 作为一个客户端。当然这两个库完全能在本地使用。</p>
-<p>这是绝对不能被低估的一个非常强大的功能。</p>
-<h2 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h2><p>把 Robot Framework 集成到持续集成服务器中非常直接，因为框架本身是用脚本语言写成的。Java 版本当然也可以使用 Maven 集成。</p>
-<h2 id="Robot-Framework-教程目录"><a href="#Robot-Framework-教程目录" class="headerlink" title="Robot Framework 教程目录"></a>Robot Framework 教程目录</h2><p><a href="https://blog.codecentric.de/en/2012/03/robot-framework-tutorial-overview/" target="_blank" rel="external">原文链接</a></p>
+            <p>多线程类似于同时执行多个不同程序，多线程运行有如下优点：</p>
 <ol>
-<li><a href="http://www.lyyyuna.com/2016/01/07/robotframework-tutorial-overview/" target="_blank" rel="external">Robot Framework 教程 - 概览（译）</a></li>
-<li><a href="http://www.lyyyuna.com/2016/04/09/robotframework-tutorial-a-complete-example/" target="_blank" rel="external">Robot Framework 教程 - 一个完整的例子（译）</a></li>
+<li>使用线程可以把占据长时间的程序中的任务放到后台去处理。</li>
+<li>用户界面可以更加吸引人，这样比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度</li>
+<li>程序的运行速度可能加快</li>
+<li>在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。</li>
 </ol>
+<p>线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。 </p>
+<p>每个线程都有他自己的一组CPU寄存器，称为线程的上下文，该上下文反映了线程上次运行该线程的CPU寄存器的状态。<br>指令指针和堆栈指针寄存器是线程上下文中两个最重要的寄存器，线程总是在进程得到上下文中运行的，这些地址都用于标志拥有线程的进程地址空间中的内存。 </p>
+<ul>
+<li>线程可以被抢占（中断）。</li>
+<li>在其他线程正在运行时，线程可以暂时搁置（也称为睡眠） – 这就是线程的退让。 </li>
+</ul>
+<h2 id="开始学习Python线程"><a href="#开始学习Python线程" class="headerlink" title="开始学习Python线程"></a>开始学习Python线程</h2><p>Python中使用线程有两种方式：函数或者用类来包装线程对象。</p>
+<p>函数式：调用thread模块中的start_new_thread()函数来产生新线程。<br>语法如下:</p>
+<pre><code>thread.start_new_thread ( function, args[, kwargs] )
+</code></pre><p>参数说明:</p>
+<ul>
+<li>function - 线程函数。</li>
+<li>args - 传递给线程函数的参数,他必须是个tuple类型。</li>
+<li>kwargs - 可选参数。</li>
+</ul>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为线程定义一个函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_time</span><span class="params">( threadName, delay)</span>:</span></span><br><span class="line">   count = <span class="number">0</span></span><br><span class="line">   <span class="keyword">while</span> count &lt; <span class="number">5</span>:</span><br><span class="line">      time.sleep(delay)</span><br><span class="line">      count += <span class="number">1</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">"%s: %s"</span> % ( threadName, time.ctime(time.time()) )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建两个线程</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">   thread.start_new_thread( print_time, (<span class="string">"Thread-1"</span>, <span class="number">2</span>, ) )</span><br><span class="line">   thread.start_new_thread( print_time, (<span class="string">"Thread-2"</span>, <span class="number">4</span>, ) )</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">   <span class="keyword">print</span> <span class="string">"Error: unable to start thread"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">   <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>执行以上程序输出结果如下：</p>
+<pre><code>Thread-1: Thu Jan 22 15:42:17 2009
+Thread-1: Thu Jan 22 15:42:19 2009
+Thread-2: Thu Jan 22 15:42:19 2009
+Thread-1: Thu Jan 22 15:42:21 2009
+Thread-2: Thu Jan 22 15:42:23 2009
+Thread-1: Thu Jan 22 15:42:23 2009
+Thread-1: Thu Jan 22 15:42:25 2009
+Thread-2: Thu Jan 22 15:42:27 2009
+Thread-2: Thu Jan 22 15:42:31 2009
+Thread-2: Thu Jan 22 15:42:35 2009
+</code></pre><p>线程的结束一般依靠线程函数的自然结束；也可以在线程函数中调用thread.exit()，他抛出SystemExit exception，达到退出线程的目的。 </p>
 
           
         
@@ -431,8 +406,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/06/07/asyncfileread01/" itemprop="url">
-                  用 asyncio 封装文件读写
+                <a class="post-title-link" href="/2016/01/24/python-queue/" itemprop="url">
+                  python Queue 模块
                 </a>
               
             
@@ -445,8 +420,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-07T17:36:25+08:00" content="2016-06-07">
-              2016-06-07
+            <time itemprop="dateCreated" datetime="2016-01-24T17:36:25+08:00" content="2016-01-24">
+              2016-01-24
             </time>
           </span>
 
@@ -459,8 +434,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂/" itemprop="url" rel="index">
-                    <span itemprop="name">杂</span>
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
                   </a>
                 </span>
 
@@ -494,122 +469,42 @@
       
         
           
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>和网络 IO 一样，文件读写同样是一个费事的操作。</p>
-<p>默认情况下，Python 使用的是系统的阻塞读写。这意味着在 asyncio 中如果调用了 </p>
-<pre><code>f = file(&apos;xx&apos;)
-f.read()
-</code></pre><p>会阻塞事件循环。</p>
-<p>本篇简述如何用 asyncio.Future 对象来封装文件的异步读写。</p>
-<p>代码在 <a href="https://github.com/lyyyuna/script_collection/blob/master/aysncfile/asyncfile.py" target="_blank" rel="external">GitHub</a>。目前仅支持 Linux。</p>
-<h2 id="阻塞和非阻塞"><a href="#阻塞和非阻塞" class="headerlink" title="阻塞和非阻塞"></a>阻塞和非阻塞</h2><p>首先需要将文件的读写改为非阻塞的形式。在非阻塞情况下，每次调用 read 都会立即返回，如果返回值为空，则意味着文件操作还未完成，反之则是读取的文件内容。</p>
-<p>阻塞和非阻塞的切换与操作系统有关，所以本篇暂时只写了 Linux 版本。如果有过 Unix 系统编程经验，会发现 Python 的操作是类似的。</p>
-<pre><code>flag = fcntl.fcntl(self.fd, fcntl.F_GETFL) 
-if fcntl.fcntl(self.fd, fcntl.F_SETFL, flag | os.O_NONBLOCK) != 0: 
-    raise OSError() 
-</code></pre><h2 id="Future-对象"><a href="#Future-对象" class="headerlink" title="Future 对象"></a>Future 对象</h2><p>Future 对象类似 Javascript 中的 Promise 对象。它是一个占位符，其值会在将来被计算出来。我们可以使用</p>
-<pre><code>result = await future
-</code></pre><p>在 future 得到值之后返回。而使用</p>
-<pre><code>future.set_result(xxx)
-</code></pre><p>就可以设置 future 的值，也意味着 future 可以被返回了。await 操作符会自动调用 future.result() 来得到值。</p>
-<h2 id="loop-call-soon"><a href="#loop-call-soon" class="headerlink" title="loop.call_soon"></a>loop.call_soon</h2><p>通过 loop.call_soon 方法可以将一个函数插入到事件循环中。</p>
-<p>至此，我们的异步文件读写思路也就出来了。通过 loop.call_soon 调用非阻塞读写文件的函数。若一次文件读写没有完成，则计算剩余所学读写的字节数，并再次插入事件循环直至读写完毕。</p>
-<p>可以发现其就是把传统 Unix 编程里，非阻塞文件读写的 while 循环换成了 asyncio 的事件循环。</p>
-<p>下面是这一过程的示意代码。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_step</span><span class="params">(self, future, n, total)</span>:</span></span><br><span class="line">    res = self.fd.read(n)</span><br><span class="line">    <span class="keyword">if</span> res <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        self.loop.call_soon(self.read_step, future, n, total)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> res: <span class="comment"># EOF</span></span><br><span class="line">        future.set_result(bytes(self.rbuffer))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    self.rbuffer.extend(res)</span><br><span class="line">    self.loop.call_soon(self.read_step, future, self.BLOCK_SIZE, total)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(self, n=<span class="number">-1</span>)</span>:</span></span><br><span class="line">    future = asyncio.Future(loop=self.loop)</span><br><span class="line"></span><br><span class="line">    self.rbuffer.clear()</span><br><span class="line">    self.loop.call_soon(self.read_step, future, min(self.BLOCK_SIZE, n), n)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> future</span><br></pre></td></tr></table></figure>
+            <p>创建一个“队列”对象</p>
+<pre><code>import Queue
+myqueue = Queue.Queue(maxsize = 10)
+</code></pre><p>Queue.Queue类即是一个队列的同步实现。队列长度可为无限或者有限。可通过Queue的构造函数的可选参数maxsize来设定队列长度。如果maxsize小于1就表示队列长度无限。</p>
+<p>将一个值放入队列中</p>
+<pre><code>myqueue.put(10)
+</code></pre><p>调用队列对象的put()方法在队尾插入一个项目。put()有两个参数，第一个item为必需的，为插入项目的值；第二个block为可选参数，默认为 1。如果队列当前为空且block为1，put()方法就使调用线程暂停,直到空出一个数据单元。如果block为0，put方法将引发Full异常。</p>
+<p>将一个值从队列中取出</p>
+<pre><code>myqueue.get()
+</code></pre><p>调用队列对象的get()方法从队头删除并返回一个项目。可选参数为block，默认为True。如果队列为空且block为True，get()就使调用线程暂停，直至有项目可用。如果队列为空且block为False，队列将引发Empty异常。</p>
+<p>python queue模块有三种队列:</p>
+<ol>
+<li>python queue模块的FIFO队列先进先出。</li>
+<li>LIFO类似于堆。即先进后出。</li>
+<li>还有一种是优先级队列级别越低越先出来。 </li>
+</ol>
+<p>针对这三种队列分别有三个构造函数:</p>
+<ol>
+<li>class Queue.Queue(maxsize) FIFO </li>
+<li>class Queue.LifoQueue(maxsize) LIFO </li>
+<li>class Queue.PriorityQueue(maxsize) 优先级队列 </li>
+</ol>
+<p>介绍一下此包中的常用方法:</p>
+<ul>
+<li>Queue.qsize() 返回队列的大小 </li>
+<li>Queue.empty() 如果队列为空，返回True,反之False </li>
+<li>Queue.full() 如果队列满了，返回True,反之False</li>
+<li>Queue.full 与 maxsize 大小对应 </li>
+<li>Queue.get([block[, timeout]])获取队列，timeout等待时间 </li>
+<li>Queue.get_nowait() 相当Queue.get(False)非阻塞 </li>
+<li>Queue.put(item) 写入队列，timeout等待时间 </li>
+<li>Queue.put_nowait(item) 相当Queue.put(item, False)</li>
+<li>Queue.task_done() 在完成一项工作之后，Queue.task_done()函数向任务已经完成的队列发送一个信号</li>
+<li>Queue.join() 实际上意味着等到队列为空，再执行别的操作 </li>
+</ul>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/07/test/" itemprop="url">
-                  test
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-07T10:31:38+08:00" content="2016-06-07">
-              2016-06-07
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
           
         
       
@@ -678,7 +573,7 @@ if fcntl.fcntl(self.fd, fcntl.F_SETFL, flag | os.O_NONBLOCK) != 0:
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -686,7 +581,7 @@ if fcntl.fcntl(self.fd, fcntl.F_SETFL, flag | os.O_NONBLOCK) != 0:
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -695,7 +590,7 @@ if fcntl.fcntl(self.fd, fcntl.F_SETFL, flag | os.O_NONBLOCK) != 0:
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

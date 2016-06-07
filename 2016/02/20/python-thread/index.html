@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python,asyncio," />
+  <meta name="keywords" content="Python,多线程," />
 
 
 
@@ -84,37 +84,37 @@
 
 
 
-<meta name="description" content="前言和网络 IO 一样，文件读写同样是一个费事的操作。
-默认情况下，Python 使用的是系统的阻塞读写。这意味着在 asyncio 中如果调用了 
-f = file(&amp;apos;xx&amp;apos;)
-f.read()
-会阻塞事件循环。
-本篇简述如何用 asyncio.Future 对象来封装文件的异步读写。
-代码在 GitHub。目前仅支持 Linux。
-阻塞和非阻塞首先需要将文件的读写改为非阻塞">
+<meta name="description" content="多线程类似于同时执行多个不同程序，多线程运行有如下优点：
+
+使用线程可以把占据长时间的程序中的任务放到后台去处理。
+用户界面可以更加吸引人，这样比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度
+程序的运行速度可能加快
+在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。
+
+线程在执行过程中">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用 asyncio 封装文件读写">
-<meta property="og:url" content="http://www.mjyplusone.com/2016/06/07/asyncfileread01/index.html">
+<meta property="og:title" content="Python 多线程">
+<meta property="og:url" content="http://www.mjyplusone.com/2016/02/20/python-thread/index.html">
 <meta property="og:site_name" content="加一的城堡">
-<meta property="og:description" content="前言和网络 IO 一样，文件读写同样是一个费事的操作。
-默认情况下，Python 使用的是系统的阻塞读写。这意味着在 asyncio 中如果调用了 
-f = file(&amp;apos;xx&amp;apos;)
-f.read()
-会阻塞事件循环。
-本篇简述如何用 asyncio.Future 对象来封装文件的异步读写。
-代码在 GitHub。目前仅支持 Linux。
-阻塞和非阻塞首先需要将文件的读写改为非阻塞">
-<meta property="og:updated_time" content="2016-06-07T03:14:47.134Z">
+<meta property="og:description" content="多线程类似于同时执行多个不同程序，多线程运行有如下优点：
+
+使用线程可以把占据长时间的程序中的任务放到后台去处理。
+用户界面可以更加吸引人，这样比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度
+程序的运行速度可能加快
+在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。
+
+线程在执行过程中">
+<meta property="og:updated_time" content="2016-06-07T12:39:03.096Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用 asyncio 封装文件读写">
-<meta name="twitter:description" content="前言和网络 IO 一样，文件读写同样是一个费事的操作。
-默认情况下，Python 使用的是系统的阻塞读写。这意味着在 asyncio 中如果调用了 
-f = file(&amp;apos;xx&amp;apos;)
-f.read()
-会阻塞事件循环。
-本篇简述如何用 asyncio.Future 对象来封装文件的异步读写。
-代码在 GitHub。目前仅支持 Linux。
-阻塞和非阻塞首先需要将文件的读写改为非阻塞">
+<meta name="twitter:title" content="Python 多线程">
+<meta name="twitter:description" content="多线程类似于同时执行多个不同程序，多线程运行有如下优点：
+
+使用线程可以把占据长时间的程序中的任务放到后台去处理。
+用户界面可以更加吸引人，这样比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度
+程序的运行速度可能加快
+在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。
+
+线程在执行过程中">
 
 
 
@@ -135,9 +135,9 @@ f.read()
 
 
 
-  <link rel="canonical" href="http://www.mjyplusone.com/2016/06/07/asyncfileread01/"/>
+  <link rel="canonical" href="http://www.mjyplusone.com/2016/02/20/python-thread/"/>
 
-  <title> 用 asyncio 封装文件读写 | 加一的城堡 </title>
+  <title> Python 多线程 | 加一的城堡 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -277,7 +277,7 @@ f.read()
             
             
               
-                用 asyncio 封装文件读写
+                Python 多线程
               
             
           </h1>
@@ -289,8 +289,8 @@ f.read()
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-07T17:36:25+08:00" content="2016-06-07">
-              2016-06-07
+            <time itemprop="dateCreated" datetime="2016-02-20T17:36:25+08:00" content="2016-02-20">
+              2016-02-20
             </time>
           </span>
 
@@ -303,8 +303,8 @@ f.read()
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂/" itemprop="url" rel="index">
-                    <span itemprop="name">杂</span>
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
                   </a>
                 </span>
 
@@ -336,28 +336,42 @@ f.read()
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>和网络 IO 一样，文件读写同样是一个费事的操作。</p>
-<p>默认情况下，Python 使用的是系统的阻塞读写。这意味着在 asyncio 中如果调用了 </p>
-<pre><code>f = file(&apos;xx&apos;)
-f.read()
-</code></pre><p>会阻塞事件循环。</p>
-<p>本篇简述如何用 asyncio.Future 对象来封装文件的异步读写。</p>
-<p>代码在 <a href="https://github.com/lyyyuna/script_collection/blob/master/aysncfile/asyncfile.py" target="_blank" rel="external">GitHub</a>。目前仅支持 Linux。</p>
-<h2 id="阻塞和非阻塞"><a href="#阻塞和非阻塞" class="headerlink" title="阻塞和非阻塞"></a>阻塞和非阻塞</h2><p>首先需要将文件的读写改为非阻塞的形式。在非阻塞情况下，每次调用 read 都会立即返回，如果返回值为空，则意味着文件操作还未完成，反之则是读取的文件内容。</p>
-<p>阻塞和非阻塞的切换与操作系统有关，所以本篇暂时只写了 Linux 版本。如果有过 Unix 系统编程经验，会发现 Python 的操作是类似的。</p>
-<pre><code>flag = fcntl.fcntl(self.fd, fcntl.F_GETFL) 
-if fcntl.fcntl(self.fd, fcntl.F_SETFL, flag | os.O_NONBLOCK) != 0: 
-    raise OSError() 
-</code></pre><h2 id="Future-对象"><a href="#Future-对象" class="headerlink" title="Future 对象"></a>Future 对象</h2><p>Future 对象类似 Javascript 中的 Promise 对象。它是一个占位符，其值会在将来被计算出来。我们可以使用</p>
-<pre><code>result = await future
-</code></pre><p>在 future 得到值之后返回。而使用</p>
-<pre><code>future.set_result(xxx)
-</code></pre><p>就可以设置 future 的值，也意味着 future 可以被返回了。await 操作符会自动调用 future.result() 来得到值。</p>
-<h2 id="loop-call-soon"><a href="#loop-call-soon" class="headerlink" title="loop.call_soon"></a>loop.call_soon</h2><p>通过 loop.call_soon 方法可以将一个函数插入到事件循环中。</p>
-<p>至此，我们的异步文件读写思路也就出来了。通过 loop.call_soon 调用非阻塞读写文件的函数。若一次文件读写没有完成，则计算剩余所学读写的字节数，并再次插入事件循环直至读写完毕。</p>
-<p>可以发现其就是把传统 Unix 编程里，非阻塞文件读写的 while 循环换成了 asyncio 的事件循环。</p>
-<p>下面是这一过程的示意代码。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_step</span><span class="params">(self, future, n, total)</span>:</span></span><br><span class="line">    res = self.fd.read(n)</span><br><span class="line">    <span class="keyword">if</span> res <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        self.loop.call_soon(self.read_step, future, n, total)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> res: <span class="comment"># EOF</span></span><br><span class="line">        future.set_result(bytes(self.rbuffer))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    self.rbuffer.extend(res)</span><br><span class="line">    self.loop.call_soon(self.read_step, future, self.BLOCK_SIZE, total)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(self, n=<span class="number">-1</span>)</span>:</span></span><br><span class="line">    future = asyncio.Future(loop=self.loop)</span><br><span class="line"></span><br><span class="line">    self.rbuffer.clear()</span><br><span class="line">    self.loop.call_soon(self.read_step, future, min(self.BLOCK_SIZE, n), n)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> future</span><br></pre></td></tr></table></figure>
+        <p>多线程类似于同时执行多个不同程序，多线程运行有如下优点：</p>
+<ol>
+<li>使用线程可以把占据长时间的程序中的任务放到后台去处理。</li>
+<li>用户界面可以更加吸引人，这样比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度</li>
+<li>程序的运行速度可能加快</li>
+<li>在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。</li>
+</ol>
+<p>线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。 </p>
+<p>每个线程都有他自己的一组CPU寄存器，称为线程的上下文，该上下文反映了线程上次运行该线程的CPU寄存器的状态。<br>指令指针和堆栈指针寄存器是线程上下文中两个最重要的寄存器，线程总是在进程得到上下文中运行的，这些地址都用于标志拥有线程的进程地址空间中的内存。 </p>
+<ul>
+<li>线程可以被抢占（中断）。</li>
+<li>在其他线程正在运行时，线程可以暂时搁置（也称为睡眠） – 这就是线程的退让。 </li>
+</ul>
+<h2 id="开始学习Python线程"><a href="#开始学习Python线程" class="headerlink" title="开始学习Python线程"></a>开始学习Python线程</h2><p>Python中使用线程有两种方式：函数或者用类来包装线程对象。</p>
+<p>函数式：调用thread模块中的start_new_thread()函数来产生新线程。<br>语法如下:</p>
+<pre><code>thread.start_new_thread ( function, args[, kwargs] )
+</code></pre><p>参数说明:</p>
+<ul>
+<li>function - 线程函数。</li>
+<li>args - 传递给线程函数的参数,他必须是个tuple类型。</li>
+<li>kwargs - 可选参数。</li>
+</ul>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为线程定义一个函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_time</span><span class="params">( threadName, delay)</span>:</span></span><br><span class="line">   count = <span class="number">0</span></span><br><span class="line">   <span class="keyword">while</span> count &lt; <span class="number">5</span>:</span><br><span class="line">      time.sleep(delay)</span><br><span class="line">      count += <span class="number">1</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">"%s: %s"</span> % ( threadName, time.ctime(time.time()) )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建两个线程</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">   thread.start_new_thread( print_time, (<span class="string">"Thread-1"</span>, <span class="number">2</span>, ) )</span><br><span class="line">   thread.start_new_thread( print_time, (<span class="string">"Thread-2"</span>, <span class="number">4</span>, ) )</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">   <span class="keyword">print</span> <span class="string">"Error: unable to start thread"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">   <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>执行以上程序输出结果如下：</p>
+<pre><code>Thread-1: Thu Jan 22 15:42:17 2009
+Thread-1: Thu Jan 22 15:42:19 2009
+Thread-2: Thu Jan 22 15:42:19 2009
+Thread-1: Thu Jan 22 15:42:21 2009
+Thread-2: Thu Jan 22 15:42:23 2009
+Thread-1: Thu Jan 22 15:42:23 2009
+Thread-1: Thu Jan 22 15:42:25 2009
+Thread-2: Thu Jan 22 15:42:27 2009
+Thread-2: Thu Jan 22 15:42:31 2009
+Thread-2: Thu Jan 22 15:42:35 2009
+</code></pre><p>线程的结束一般依靠线程函数的自然结束；也可以在线程函数中调用thread.exit()，他抛出SystemExit exception，达到退出线程的目的。 </p>
 
       
     </div>
@@ -381,7 +395,7 @@ if fcntl.fcntl(self.fd, fcntl.F_SETFL, flag | os.O_NONBLOCK) != 0:
           
             <a href="/tags/Python/" rel="tag">#Python</a>
           
-            <a href="/tags/asyncio/" rel="tag">#asyncio</a>
+            <a href="/tags/多线程/" rel="tag">#多线程</a>
           
         </div>
       
@@ -390,17 +404,13 @@ if fcntl.fcntl(self.fd, fcntl.F_SETFL, flag | os.O_NONBLOCK) != 0:
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/07/test/" rel="next" title="test">
-                <i class="fa fa-chevron-left"></i> test
+              <a href="/2016/01/24/python-queue/" rel="next" title="python Queue 模块">
+                <i class="fa fa-chevron-left"></i> python Queue 模块
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/07/robotframework-tutorial-overview/" rel="prev" title="Robot Framework 教程 - 概览（译）">
-                Robot Framework 教程 - 概览（译） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -468,7 +478,7 @@ if fcntl.fcntl(self.fd, fcntl.F_SETFL, flag | os.O_NONBLOCK) != 0:
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -476,7 +486,7 @@ if fcntl.fcntl(self.fd, fcntl.F_SETFL, flag | os.O_NONBLOCK) != 0:
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -485,7 +495,7 @@ if fcntl.fcntl(self.fd, fcntl.F_SETFL, flag | os.O_NONBLOCK) != 0:
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -514,7 +524,7 @@ if fcntl.fcntl(self.fd, fcntl.F_SETFL, flag | os.O_NONBLOCK) != 0:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞和非阻塞"><span class="nav-number">2.</span> <span class="nav-text">阻塞和非阻塞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Future-对象"><span class="nav-number">3.</span> <span class="nav-text">Future 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loop-call-soon"><span class="nav-number">4.</span> <span class="nav-text">loop.call_soon</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始学习Python线程"><span class="nav-number">1.</span> <span class="nav-text">开始学习Python线程</span></a></li></ol></div>
             
           </div>
         </section>
